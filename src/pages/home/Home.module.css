@@ -7,6 +7,7 @@
 .content {
   padding-right: 30px;
 }
+
 .sidebar {
   padding-left: 30px;
 }
@@ -15,7 +16,8 @@
   background: #1f8597;
   border-radius: 10px;
 }
-.sidebar input, .sidebar select {
+.sidebar input,
+.sidebar select {
   display: block;
   width: 100%;
   padding: 10px;
@@ -58,11 +60,11 @@
   margin: 10px;
 }
 
-/* transactions */
-.transactions li {
+/* expenses */
+.expenses li {
   margin: 30px auto;
   border: 1px solid #f2f2f2;
-  box-shadow: 3px 3px 5px rgba(50,50,50,0.1);
+  box-shadow: 3px 3px 5px rgba(50, 50, 50, 0.1);
   padding: 20px;
   display: flex;
   align-items: center;
@@ -70,21 +72,24 @@
   overflow: hidden;
   border-left: 4px solid #1f8597;
 }
-.transactions .name {
+.expenses .name {
   color: #777;
   font-size: 1.4em;
 }
-.transactions .amount {
+.name::first-letter {
+  text-transform: capitalize;
+}
+.expenses .amount {
   margin-left: auto;
   margin-right: 40px;
   color: #777;
   font-weight: bold;
   font-size: 1.3em;
 }
-.transactions button {
+.expenses button {
   position: absolute;
   top: 0;
-  right:0;
+  right: 0;
   background: #ddd;
   color: #777;
   border: none;
@@ -98,4 +103,15 @@
 .content h3 {
   color: #1f8597;
   margin-bottom: 20px;
+}
+
+.date_container {
+  padding-right: 20px;
+}
+.date {
+  color: #2e8297;
+  font-size: 14px;
+}
+.dateAgo {
+  font-size: 13px;
 }

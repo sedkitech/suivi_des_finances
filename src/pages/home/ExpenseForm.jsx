@@ -1,28 +1,37 @@
 import { useState } from 'react'
-
-export default function TransactionForm({ setTransactions }) {
-    const [name, setName] = useState('')
+import format from 'date-fns/format'
+export default function ExpenseForm({ setExpenses }) {
+    const [title, setTitle] = useState('')
     const [amount, setAmount] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setTransactions((prevtransactions) => {
-            return [...prevtransactions, { name, amount, id: Math.round(Math.random() * 100) }]
+        const currentTime = format(new Date(), 'MM/dd/yyyy HH:mm:ss')
+        // console.log("currentTime", currentTime)
+        setExpenses((prevExpenses) => {
+            return [...prevExpenses,
+            {
+                title,
+                amount,
+                id: Math.round(Math.random() * 100),
+                date: currentTime
+            }
+            ]
         })
-        setName('')
+        setTitle('')
         setAmount('')
     }
     return (
         <>
-            <h3>Ajouter une Transaction</h3>
+            <h3>Ajouter une dépense</h3>
             <form onSubmit={handleSubmit}>
                 <label>
-                    <span>Nom:</span>
+                    <span>Titre:</span>
                     <input
                         type="text"
                         required
-                        onChange={(e) => setName(e.target.value)}
-                        value={name}
+                        onChange={(e) => setTitle(e.target.value)}
+                        value={title}
                     />
                 </label>
                 <label>

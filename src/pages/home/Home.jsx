@@ -1,32 +1,35 @@
 // styles
 import styles from './Home.module.css'
 // components
-import TransactionForm from './TransactionForm'
-import TransactionList from './TransactionList'
+import ExpenseForm from './ExpenseForm'
+import ExpenseList from './ExpenseList'
 import { useState } from 'react';
 
 export default function Home() {
-    const oldTransactions = [
+    const oldExpenses = [
         {
             id: 1,
-            name: 'Facture internet',
+            title: 'Facture internet',
             amount: '30',
+            date: "11/16/2022 21:06:58"
         },
         {
             id: 2,
-            name: 'Lavage de la voiture',
+            title: 'Lavage de la voiture',
             amount: '15',
+            date: "11/17/2022 16:20:12"
+
         },
     ]
 
-    const [transactions, setTransactions] = useState(oldTransactions);
+    const [expenses, setExpenses] = useState(oldExpenses);
     return (
         <div className={styles.container}>
             <div className={styles.content}>
-                <TransactionList transactions={transactions} setTransactions={setTransactions} />
+                <ExpenseList expenses={expenses} setExpenses={setExpenses} />
             </div>
             <div className={styles.sidebar}>
-                <TransactionForm setTransactions={setTransactions} />
+                <ExpenseForm setExpenses={setExpenses} />
             </div>
         </div>
     )
