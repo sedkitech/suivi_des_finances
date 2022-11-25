@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import format from 'date-fns/format'
 import { useFirestore } from './../../hooks/useFirestore';
+import { useEffect } from 'react';
 
-export default function ExpenseForm({ setExpenses, uid }) {
+export default function ExpenseForm({
+    //  setExpenses,
+    uid }) {
 
     const [title, setTitle] = useState('')
     const [amount, setAmount] = useState('')
@@ -13,19 +16,27 @@ export default function ExpenseForm({ setExpenses, uid }) {
         addDocument({ uid, title, amount })
         const currentTime = format(new Date(), 'MM/dd/yyyy HH:mm:ss')
         // console.log("currentTime", currentTime)
-        setExpenses((prevExpenses) => {
-            return [...prevExpenses,
-            {
-                title,
-                amount,
-                id: Math.round(Math.random() * 100),
-                date: currentTime
-            }
-            ]
-        })
-        setTitle('')
-        setAmount('')
+        // setExpenses((prevExpenses) => {
+        //     return [...prevExpenses,
+        //     {
+        //         title,
+        //         amount,
+        //         id: Math.round(Math.random() * 100),
+        //         date: currentTime
+        //     }
+        //     ]
+        // })
+
     }
+
+    // reset the form fields
+    useEffect(() => {
+        if (state.success) {
+            setTitle('')
+            setAmount('')
+        }
+    }, [state.success])
+
     return (
         <>
             <h3>Ajouter une dépense</h3>

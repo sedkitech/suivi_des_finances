@@ -8,23 +8,23 @@ import { useAuthContext } from './../../hooks/useAuthContext';
 import { useCollection } from './../../hooks/useCollection';
 
 export default function Home() {
-    const oldExpenses = [
-        {
-            id: 1,
-            title: 'Facture internet',
-            amount: '30',
-            date: "11/16/2022 21:06:58"
-        },
-        {
-            id: 2,
-            title: 'Lavage de la voiture',
-            amount: '15',
-            date: "11/17/2022 16:20:12"
+    // const oldExpenses = [
+    //     {
+    //         id: 1,
+    //         title: 'Facture internet',
+    //         amount: '30',
+    //         date: "11/16/2022 21:06:58"
+    //     },
+    //     {
+    //         id: 2,
+    //         title: 'Lavage de la voiture',
+    //         amount: '15',
+    //         date: "11/17/2022 16:20:12"
 
-        },
-    ]
+    //     },
+    // ]
 
-    const [expenses, setExpenses] = useState(oldExpenses);
+    // const [expenses, setExpenses] = useState(oldExpenses);
     const { user } = useAuthContext()
     const { documents, error } = useCollection(
         "expenses",
@@ -38,12 +38,15 @@ export default function Home() {
                 {documents && <ExpenseList
                     uid={user.uid}
                     documents={documents}
-                    expenses={expenses}
-                    setExpenses={setExpenses}
+                // expenses={expenses}
+                // setExpenses={setExpenses}
                 />}
             </div>
             <div className={styles.sidebar}>
-                <ExpenseForm uid={user.uid} setExpenses={setExpenses} />
+                <ExpenseForm
+                    uid={user.uid}
+                // setExpenses={setExpenses} 
+                />
             </div>
         </div>
     )
