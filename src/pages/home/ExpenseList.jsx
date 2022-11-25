@@ -1,13 +1,17 @@
 // styles
 import styles from './Home.module.css'
 import formatDistance from 'date-fns/formatDistance'
-export default function ExpenseList({ expenses, setExpenses }) {
+import format from 'date-fns/format'
+import { useFirestore } from './../../hooks/useFirestore';
+
+export default function ExpenseList({ documents, expenses, setExpenses }) {
     const deleteExpense = (id) => {
-        const filtredExpenses = expenses.filter(expense => expense.id != id)
+        const filtredExpenses = expenses.filter(expense => expense.id !== id)
         setExpenses(filtredExpenses)
     }
-    let d = Date.now()
-    let result = null
+    let currentTime = Date.now()
+    const { deleteDocument, state } = useFirestore("expenses")
+    console.log(state)
     return (
         <>
             <h3>List des Dépenses</h3>
@@ -19,7 +23,7 @@ export default function ExpenseList({ expenses, setExpenses }) {
                                 className={styles.date}>{expense.date}</em>
                             <p className={styles.dateAgo}>
                                 (
-                                {formatDistance(new Date(expense.date), new Date(d), { addSuffix: true })}
+                                {formatDistance(new Date(expense.date), new Date(currentTime), { addSuffix: true })}
                                 )
                             </p>
                         </span>
@@ -30,6 +34,34 @@ export default function ExpenseList({ expenses, setExpenses }) {
                 ))
                 }
             </ul >
+
+            <ul className={styles.expenses}>
+                {documents.map((expense) => (
+                    <li key={expense.id}>
+                        <span className={styles.date_container}>
+                            <em className={styles.date}>
+                                {expense.createdAt.toString()}
+                            </em>
+
+                            {/* <em className={styles.date}>
+                                {format(new Date(expense.createdAt.toString()), 'MM/dd/yyyy HH:mm:ss')}
+                            </em> */}
+
+                            {/* <p className={styles.dateAgo}>
+                                (
+                                {formatDistance(new Date(expense.createdAt), new Date(currentTime), { addSuffix: true })}
+                                )
+                            </p> */}
+                        </span>
+                        <p className={styles.name}>{expense.title}</p>
+                        <p p className={styles.amount} > {expense.amount} Dt</p>
+                        <button onClick={() => deleteDocument(expense.id)}>x</button>
+                    </li>
+                ))
+                }
+            </ul >
+
+
         </>
 
     )

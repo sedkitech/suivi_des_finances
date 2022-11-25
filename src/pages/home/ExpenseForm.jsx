@@ -1,11 +1,16 @@
 import { useState } from 'react'
 import format from 'date-fns/format'
-export default function ExpenseForm({ setExpenses }) {
+import { useFirestore } from './../../hooks/useFirestore';
+
+export default function ExpenseForm({ setExpenses, uid }) {
+
     const [title, setTitle] = useState('')
     const [amount, setAmount] = useState('')
+    const { addDocument, state } = useFirestore("expenses")
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        addDocument({ uid, title, amount })
         const currentTime = format(new Date(), 'MM/dd/yyyy HH:mm:ss')
         // console.log("currentTime", currentTime)
         setExpenses((prevExpenses) => {

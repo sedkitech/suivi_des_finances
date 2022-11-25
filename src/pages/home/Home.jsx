@@ -4,6 +4,8 @@ import styles from './Home.module.css'
 import ExpenseForm from './ExpenseForm'
 import ExpenseList from './ExpenseList'
 import { useState } from 'react';
+import { useAuthContext } from './../../hooks/useAuthContext';
+import { useCollection } from './../../hooks/useCollection';
 
 export default function Home() {
     const oldExpenses = [
@@ -23,13 +25,25 @@ export default function Home() {
     ]
 
     const [expenses, setExpenses] = useState(oldExpenses);
+    const { user } = useAuthContext()
+    const { documents, error } = useCollection(
+        "expenses",
+        ["uid", "==", user.uid],
+        ["createdAt", "desc"]
+    )
     return (
         <div className={styles.container}>
             <div className={styles.content}>
-                <ExpenseList expenses={expenses} setExpenses={setExpenses} />
+                {error && <p>{error}</p>}
+                {documents && <ExpenseList
+                    uid={user.uid}
+                    documents={documents}
+                    expenses={expenses}
+                    setExpenses={setExpenses}
+                />}
             </div>
             <div className={styles.sidebar}>
-                <ExpenseForm setExpenses={setExpenses} />
+                <ExpenseForm uid={user.uid} setExpenses={setExpenses} />
             </div>
         </div>
     )

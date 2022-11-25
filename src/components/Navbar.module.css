@@ -17,3 +17,26 @@
   letter-spacing: 1px;
   font-size: 1.2em;
 }
+.navbar button,
+.navbar a {
+  margin-left: 16px;
+}
+.navbar a {
+  color: #333;
+  text-decoration: none;
+}
+
+.navbar button {
+  background: none;
+  border: 2px solid #1f8597;
+  padding: 6px 12px;
+  border-radius: 4px;
+  color: #1f8597;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.7em;
+}
+.navbar button:hover {
+  background: #1f8597;
+  color: #fff;
+}
