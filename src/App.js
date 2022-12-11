@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 //components and pages
 import Navbar from './components/Navbar';
