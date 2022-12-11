@@ -7,7 +7,7 @@ import styles from './Navbar.module.css'
 
 export default function Navbar() {
     const { user } = useAuthContext()
-    console.log("navbar  user", user)
+    console.log("user of the navbar component", user)
     const { logout } = useLogout()
     return (
         <nav className={styles.navbar}>
